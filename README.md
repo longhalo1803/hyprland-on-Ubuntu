@@ -69,6 +69,7 @@ Toàn bộ quy trình từ kiến trúc, cấu hình, xử lý sự cố đến 
 | **03**  | [**Hướng Dẫn Cấu Hình Từng Bước Từ Con Số 0**](docs/reports/03_SETUP_AND_ISOLATION_GUIDE.md)             | **Cẩm nang triển khai thực tế**: Cài đặt Hyprland native, font chữ, thiết lập Nix Home-Manager, áp dụng declarative wrapper và đồng bộ giao diện.                 |
 | **04**  | [**Xử Lý Xung Đột & Tối Ưu Hóa Ổn Định**](docs/reports/04_TROUBLESHOOTING_AND_STABILITY.md)              | Phân tích chuyên sâu các sự cố thực tế: Lỗi khởi tạo EGL OpenGL của Quickshell, xung đột PID với binary `.quickshell-wra` của Nix, và cách ly Waybar đa màn hình. |
 | **05**  | [**Hướng Dẫn Nâng Cấp, Bảo Trì & Duy Trì Độ Ổn Định**](docs/reports/05_MAINTENANCE_AND_UPGRADE_GUIDE.md) | Quy trình nâng cấp gói Nix an toàn, kiểm tra dry-run, cơ chế rollback tức thì về thế hệ trước, dọn rác `/nix/store` và quản lý cập nhật APT/DKMS.                 |
+| **06**  | [**Môi Trường TUI, Neovim (LazyVim) & Tùy Biến Desktop**](docs/reports/06_TUI_AND_EXTENSIONS_GUIDE.md)   | Thiết lập Neovim Nightly >= 0.11.2 (LazyVim, Prettier, Auto-save 500ms), bộ công cụ TUI (tty-clock, btop, cava), Quickshell Wallpaper Flow và tùy biến phím tắt.  |
 
 ---
 
@@ -172,17 +173,22 @@ chmod +x ~/.config/hypr/scripts/*.sh ~/.config/hypr/UserScripts/*.sh
 
 ## ⌨️ Bảng Phím Tắt & Thao Tác Cử Chỉ (Keybindings & Gestures)
 
-| Phím Tắt / Cử Chỉ                        | Chức Năng                        | Ghi Chú                          |
-| :--------------------------------------- | :------------------------------- | :------------------------------- |
-| **`Super + A`**                          | **Mở/Đóng Window Overview**      | Giao diện thẻ bài chọn cửa sổ    |
-| **Vuốt 3 ngón tay lên** _(Touchpad)_     | **Mở/Đóng Window Overview**      | Tích hợp cử chỉ cảm ứng mượt mà  |
-| **`Super + Enter`**                      | Mở Terminal Kitty                | Sử dụng wrapper Nix tăng tốc GPU |
-| **`Super + Q`**                          | Đóng cửa sổ đang chọn            | Kill active window               |
-| **`Super + Space`** hoặc **`Super + D`** | Mở Menu ứng dụng (Rofi / Fuzzel) | Tìm kiếm & chạy ứng dụng         |
-| **`Super + M`**                          | Mở Menu Nguồn & Đăng xuất        | Wlogout                          |
-| **`Super + Print`** / **`Print`**        | Chụp màn hình vùng chọn          | Grim + Slurp + Swappy            |
-| **`Super + E`**                          | Mở trình quản lý tệp tin         | File Manager                     |
-| **`Super + 1 -> 9`**                     | Chuyển đổi giữa các Workspace    | Workspace navigation             |
+| Phím Tắt / Cử Chỉ                        | Chức Năng Cụ Thể                    | Lệnh / Daemon Thực Thi            |
+| :--------------------------------------- | :---------------------------------- | :-------------------------------- |
+| **`Super + A`**                          | **Mở/Đóng Window Overview**         | Quickshell QML Layer Shell        |
+| **Vuốt 3 ngón tay lên** _(Touchpad)_     | **Mở/Đóng Window Overview**         | Cử chỉ cảm ứng Touchpad đa điểm   |
+| **`Super + W`**                          | **Bộ Chọn Hình Nền Wallpaper Flow** | Quickshell Parallelogram 2D Flow  |
+| **`Super + D`**                          | **Mở Menu Ứng Dụng (Rofi)**         | `rofi -show drun`                 |
+| **`Super + M`**                          | **Chế Độ Infinite Canvas Submap**   | Điều hướng canvas (Tab/Enter/Esc) |
+| **`Super + B`**                          | Ẩn / Hiện Thanh Trạng Thái          | Toggle Waybar (`SIGUSR1`)         |
+| **`Super + F`**                          | Phóng to toàn màn hình (giữ Waybar) | `fullscreen, 1`                   |
+| **`Super + I`**                          | Mở Cài Đặt Hệ Thống GNOME           | `gnome-control-center`            |
+| **`Super + Shift + S`** hoặc **`Print`** | Chụp màn hình vùng chọn qua Ksnip   | `grim + slurp + ksnip`            |
+| **`Super + Print`**                      | Chụp toàn bộ màn hình qua Ksnip     | `grim + ksnip`                    |
+| **`Super + Enter`**                      | Mở Terminal Kitty (GPU Wrapper)     | `kitty-wrapped`                   |
+| **`Super + Q`**                          | Đóng cửa sổ đang chọn               | Kill active window                |
+| **`Super + E`**                          | Mở trình quản lý tệp tin            | File Manager                      |
+| **`Super + 1 -> 9`**                     | Chuyển đổi giữa các Workspace       | Workspace navigation              |
 
 ---
 

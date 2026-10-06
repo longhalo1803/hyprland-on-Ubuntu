@@ -8,7 +8,8 @@ Toàn bộ các gói phần mềm phục vụ môi trường Hyprland được k
 
 ```nix
 home.packages = with pkgs; [
-  kitty
+  kitty-wrapped
+  quickshell-wrapped
   waybar
   mako
   fuzzel
@@ -21,30 +22,44 @@ home.packages = with pkgs; [
   slurp
   swappy
   wl-clipboard
-  quickshell
   mesa
+
+  # Audio visualizer
+  cava
 ];
 ```
 
 ### Bảng phân tích chi tiết từng gói và vai trò:
 
-| Package             | Phiên Bản Cài Đặt | Vai Trò Trong Hệ Thống Desktop                                                                                       |
-| :------------------ | :---------------- | :------------------------------------------------------------------------------------------------------------------- |
-| **`kitty`**         | v0.48.2           | Terminal Emulator tăng tốc phần cứng GPU (OpenGL), hỗ trợ hiển thị hình ảnh inline, font ligatures                   |
-| **`waybar`**        | v0.15.0           | Thanh trạng thái đa năng (Status Bar), hiển thị Workspace, Pin, Tải CPU/RAM, Âm lượng, Đồng hồ, Khay hệ thống        |
-| **`quickshell`**    | v0.3.1            | Framework dựng giao diện desktop dựa trên Qt6/QML và Wayland Layer Shell; phụ trách tính năng **Window Overview**    |
-| **`mesa`**          | v26.2.2           | Thư viện driver đồ họa tăng tốc phần cứng (EGL, DRI, GBM) của Nix, cầu nối để các ứng dụng GUI Nix nhận diện GPU máy |
-| **`rofi`**          | v1.7.5+           | Trình khởi chạy ứng dụng (App Launcher), menu chuyển đổi Layout Waybar, Menu đổi hình nền                            |
-| **`fuzzel`**        | v1.10+            | Menu tìm kiếm ứng dụng tối giản, siêu nhẹ trên Wayland (dùng làm launcher dự phòng)                                  |
-| **`mako`**          | v1.9+             | Daemon hiển thị thông báo popup nhẹ nhàng trên Wayland                                                               |
-| **`pamixer`**       | v1.6+             | Công cụ dòng lệnh điều khiển âm lượng hệ thống qua PipeWire / PulseAudio                                             |
-| **`brightnessctl`** | v0.5.1            | Công cụ điều chỉnh độ sáng màn hình laptop qua phím chức năng Fn                                                     |
-| **`wlogout`**       | v1.2+             | Menu tắt máy, khởi động lại, khóa màn hình, đăng xuất toàn màn hình dạng đồ họa                                      |
-| **`grim`**          | v1.4+             | Công cụ chụp ảnh màn hình Wayland                                                                                    |
-| **`slurp`**         | v1.5+             | Công cụ chọn vùng màn hình tương tác bằng chuột                                                                      |
-| **`swappy`**        | v1.5+             | Trình chỉnh sửa ảnh chụp màn hình nhanh (vẽ mũi tên, text, làm mờ, highlight)                                        |
-| **`wl-clipboard`**  | v2.2+             | Bộ công cụ quản lý clipboard trên Wayland (`wl-copy`, `wl-paste`)                                                    |
-| **`fastfetch`**     | v2.20+            | Tiện ích hiển thị thông tin phần cứng, logo phân phối và cấu hình hệ điều hành trong terminal                        |
+| Package             | Phiên Bản Cài Đặt | Vai Trò Trong Hệ Thống Desktop                                                    |
+| :------------------ | :---------------- | :-------------------------------------------------------------------------------- |
+| **`kitty`**         | v0.48.2           | Terminal Emulator GPU OpenGL (được wrap driver Mesa từ Nix Store)                 |
+| **`waybar`**        | v0.15.0           | Thanh trạng thái đa năng (Status Bar) khóa trên màn hình chính eDP-1              |
+| **`quickshell`**    | v0.3.1            | Framework Qt6/QML Wayland Layer Shell phụ trách **Window Overview**               |
+| **`cava`**          | v1.0.0            | Audio visualizer trực quan hóa sóng âm thanh (tự đồng bộ màu nền & chữ của Kitty) |
+| **`mesa`**          | v26.2.2           | Thư viện driver đồ họa tăng tốc phần cứng (EGL, DRI, GBM) của Nix                 |
+| **`rofi`**          | v2.0.0            | Trình khởi chạy ứng dụng (App Launcher), menu Waybar layout, đổi theme            |
+| **`fuzzel`**        | v1.14.1           | Menu tìm kiếm ứng dụng Wayland siêu nhẹ                                           |
+| **`mako`**          | v1.11.0           | Daemon hiển thị thông báo popup                                                   |
+| **`pamixer`**       | v1.6              | Công cụ dòng lệnh điều khiển âm lượng hệ thống qua PipeWire                       |
+| **`brightnessctl`** | v0.5.1            | Công cụ điều chỉnh độ sáng màn hình                                               |
+| **`wlogout`**       | v1.2.2            | Menu tắt máy, khởi động lại, khóa màn hình đồ họa                                 |
+| **`grim`**          | v1.5.0            | Công cụ chụp ảnh màn hình Wayland                                                 |
+| **`slurp`**         | v1.5.0            | Công cụ chọn vùng màn hình tương tác bằng chuột                                   |
+| **`swappy`**        | v1.8.0            | Trình chỉnh sửa ảnh chụp màn hình nhanh                                           |
+| **`wl-clipboard`**  | v2.3.0            | Bộ công cụ quản lý clipboard trên Wayland (`wl-copy`, `wl-paste`)                 |
+| **`fastfetch`**     | v2.68.1           | Tiện ích hiển thị thông tin phần cứng và distro                                   |
+
+### 1.2. Hệ Sinh Thái TUI & Trình Biên Tập Mã Nguồn Bổ Trợ (TUI & Dev Stack)
+
+Các công cụ dòng lệnh đồ họa (TUI) được thiết lập độc lập nhằm tối ưu hiệu năng và thẩm mỹ:
+
+| Công Cụ         | Phiên Bản | Nguồn Cài Đặt            | Vai Trò & Điểm Nổi Bật                                                                    |
+| :-------------- | :-------- | :----------------------- | :---------------------------------------------------------------------------------------- |
+| **`neovim`**    | v0.11.x+  | GitHub Release (Nightly) | Trình soạn thảo chính (LazyVim Distro, Prettier, Auto-save 500ms, TokyoNight Transparent) |
+| **`tty-clock`** | v2.3+     | APT / Source             | Đồng hồ số digital căn giữa màn hình (`tty-clock -c -C 7 -s -b`)                          |
+| **`btop`**      | v1.4.0+   | APT / Nix                | Trình theo dõi tiến trình và tài nguyên phần cứng (CPU, GPU, RAM)                         |
+| **`cmatrix`**   | v2.0+     | APT                      | Hiệu ứng mưa mã nguồn màn hình chờ                                                        |
 
 ---
 
@@ -73,17 +88,17 @@ home.packages = with pkgs; [
 
 ### 2. `~/config/waybar/` (Thanh trạng thái Waybar)
 
-- **`configs/`:** Chứa 39 kiểu dáng (layout) khác nhau (`[TOP] Peony`, `[TOP] Sleek`, `[BOT] Camellia`, v.v.).
+- **`configs/`:** Chứa 39 kiểu dáng (layout) khác nhau. Bố cục đang kích hoạt: `[TOP] Default Laptop-glass`.
+- **`style/`:** Chứa các bộ CSS giao diện. Bộ CSS đang kích hoạt: `[Kitty] Islands-Glass.css` (bo góc tròn, kính mờ theo Kitty).
 - **`Modules` & `ModulesWorkspaces`:** Định nghĩa các widget hiển thị.
-- **`UserModules`:** Nơi người dùng ghi đè cấu hình cá nhân (được `include` trong tất cả 39 layout).
+- **`UserModules`:** Nơi người dùng ghi đè cấu hình cá nhân (khóa cố định output vào `eDP-1` cho laptop).
 
-### 3. `~/config/quickshell/` (Bộ Widget QML Overview)
+### 3. `~/config/quickshell/` (Hệ Sinh Thái QML Desktop Shell)
 
-- **`overview/shell.qml`:** Điểm khởi đầu nạp toàn bộ cấu hình QML.
-- **`overview/modules/overview/`:**
-  - `Overview.qml`: Tạo `PanelWindow` trên Layer Shell cấp độ `Overlay` và nhận lệnh IPC `open`/`close`/`toggle`.
-  - `OverviewWidget.qml`: Lưới các workspace thu nhỏ và bố cục hiển thị cửa sổ.
-  - `OverviewWindow.qml`: Thẻ bài đại diện cho từng cửa sổ đang mở.
+- **`overview/shell.qml`:** Bộ Window Overview kích hoạt qua `Super + A` hoặc vuốt 3 ngón tay.
+- **`wallpaper-flow/shell.qml`:** Bộ chọn hình nền **Parallelogram 2D Flow** độc lập kích hoạt qua `Super + W`.
+  - Hiển thị danh sách hình nền dạng thẻ bài vát góc, tỷ lệ rộng không chồng lấn.
+  - Tích hợp `backend.sh` sinh cache thumbnail tốc độ cao và script điều khiển `WallpaperFlowToggle.sh`.
 - **`overview/services/`:**
   - `GlobalStates.qml`: Lưu trữ trạng thái đóng/mở của Overview.
   - `HyprlandData.qml`: Lấy dữ liệu cửa sổ, workspace và màn hình thời gian thực qua socket IPC của Hyprland.
