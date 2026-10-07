@@ -45,7 +45,7 @@ ERROR: Failed to create graphics context for qs::wayland::layershell::WlrLayersh
 
 ### Triệu chứng
 
-Trong script gốc [`~/config/hypr/scripts/OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh), lệnh:
+Trong script gốc `~/.config/hypr/scripts/OverviewToggle.sh`, lệnh:
 
 ```bash
 if pgrep -x quickshell >/dev/null 2>&1; then ...
@@ -65,10 +65,10 @@ Vì cờ `-x` (exact match) của lệnh `pgrep` chỉ so sánh chuỗi chính x
 
 ### Giải pháp đã áp dụng
 
-Cập nhật cú pháp trong [`OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh):
+Cập nhật cú pháp trong `~/.config/hypr/scripts/OverviewToggle.sh`:
 
 ```bash
-if pgrep -f quickshell >/dev/null 2>&1 || pidof quickshell >/dev/null 2>&1; then
+if pgrep -f 'qs -c overview' >/dev/null 2>&1 || pidof qs >/dev/null 2>&1; then
     ...
 ```
 
@@ -76,11 +76,11 @@ Cờ `-f` cho phép đối chiếu trên toàn bộ chuỗi dòng lệnh (full c
 
 ---
 
-## 3. Cấu Trúc Wrapper Chuyên Dụng Tại `~/local/bin/`
+## 3. Cấu Trúc Wrapper Chuyên Dụng Tại `~/.local/bin/`
 
 Để đảm bảo mọi lệnh gọi CLI như `qs` hoặc `quickshell` ở bất kỳ đâu (từ Hyprland, Terminal, hay script thứ 3) đều tự động mang theo môi trường đồ họa, chúng tôi đã tạo wrapper:
 
-- **File [`~/local/bin/qs`](~/.local/bin/qs):**
+- **File `~/.local/bin/qs`:**
   ```bash
   #!/usr/bin/env bash
   export LD_LIBRARY_PATH="$HOME/.nix-profile/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
@@ -88,7 +88,7 @@ Cờ `-f` cho phép đối chiếu trên toàn bộ chuỗi dòng lệnh (full c
   export GBM_BACKENDS_PATH="$HOME/.nix-profile/lib/gbm"
   exec "$HOME/.nix-profile/bin/qs" "$@"
   ```
-- **Thứ tự ưu tiên PATH:** Bổ sung `env = PATH,$HOME/.local/bin:$PATH` vào đầu [`~/config/hypr/configs/ENVariables.conf`](~/.config/hypr/configs/ENVariables.conf), đảm bảo Hyprland luôn ưu tiên wrapper này trước binary thô của Nix.
+- **Thứ tự ưu tiên PATH:** Bổ sung `env = PATH,$HOME/.local/bin:$PATH` vào đầu `~/.config/hypr/configs/ENVariables.conf`, đảm bảo Hyprland luôn ưu tiên wrapper này trước binary thô của Nix.
 
 ---
 
@@ -104,8 +104,8 @@ Waybar hỗ trợ thuộc tính `"output"` ở cấp gốc (root level) của JS
 
 ### Điểm chạm tối ưu nhất (UserModules Hook)
 
-Thay vì chỉnh sửa trực tiếp vào file layout hiện tại (sẽ bị mất khi người dùng chọn đổi giao diện qua Rofi menu), chúng tôi xác định toàn bộ 39 layout trong `~/config/waybar/configs/` đều nạp file:
-👉 [`~/config/waybar/UserModules`](~/.config/waybar/UserModules)
+Thay vì chỉnh sửa trực tiếp vào file layout hiện tại (sẽ bị mất khi người dùng chọn đổi giao diện qua Rofi menu), chúng tôi xác định toàn bộ 39 layout trong `~/.config/waybar/configs/` đều nạp file:
+👉 `~/.config/waybar/UserModules`
 
 Bằng cách khai báo:
 

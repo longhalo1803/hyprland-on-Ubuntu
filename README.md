@@ -152,7 +152,7 @@ chmod +x ~/.config/hypr/scripts/*.sh ~/.config/hypr/UserScripts/*.sh
 
 - **Vá nhận diện PID trong `OverviewToggle.sh`:**
   ```bash
-  sed -i 's/pgrep -x quickshell/pgrep -f quickshell || pidof quickshell/g' ~/.config/hypr/scripts/OverviewToggle.sh
+  sed -i "s/pgrep -x quickshell/pgrep -f 'qs -c overview' || pidof qs/g" ~/.config/hypr/scripts/OverviewToggle.sh
   ```
 - **Khởi chạy Quickshell trong `~/.config/hypr/configs/Startup_Apps.conf`:**
   ```ini

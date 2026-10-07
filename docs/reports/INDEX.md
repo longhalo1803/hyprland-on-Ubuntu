@@ -20,7 +20,7 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh về kiến trúc
 ## ⚡ Các Điểm Chạm Kỹ Thuật Quan Trọng (Key Takeaways)
 
 1. **Vị trí cấu hình phần mềm tập trung:**
-   - File khai báo gói Nix: [`~/config/home-manager/home.nix`](~/.config/home-manager/home.nix)
+   - File khai báo gói Nix: `~/.config/home-manager/home.nix`
    - Lệnh kích hoạt cấu hình mới: `home-manager switch`
 2. **Cơ chế tăng tốc phần cứng cho ứng dụng GUI Nix:**
    - Đảm bảo có `pkgs.mesa` trong `home.nix`.
@@ -28,6 +28,6 @@ Chào mừng bạn đến với bộ tài liệu hoàn chỉnh về kiến trúc
 3. **Thao tác cử chỉ & phím tắt kích hoạt Window Overview:**
    - Phím tắt: **`Super + A`**
    - Cử chỉ Touchpad: **Vuốt 3 ngón tay hướng lên**
-   - Script điều khiển: [`~/config/hypr/scripts/OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh)
+   - Script điều khiển: `~/.config/hypr/scripts/OverviewToggle.sh`
 4. **Cấu hình màn hình hiển thị thanh Waybar:**
-   - Ghi đè vĩnh viễn cho tất cả 39 layout tại: [`~/config/waybar/UserModules`](~/.config/waybar/UserModules)
+   - Ghi đè vĩnh viễn cho tất cả 39 layout tại: `~/.config/waybar/UserModules`

@@ -8,7 +8,7 @@ Hệ thống của bạn đang chạy song song **Ubuntu 24.04 (môi trường m
 
 ### 1.1. Đồng bộ D-Bus và Systemd User Environment
 
-Trong file [`~/config/hypr/configs/Startup_Apps.conf`](~/.config/hypr/configs/Startup_Apps.conf):
+Trong file `~/.config/hypr/configs/Startup_Apps.conf`:
 
 ```ini
 exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_IM_MODULE QT_IM_MODULE XMODIFIERS
@@ -25,7 +25,7 @@ exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESK
 
 ### 1.2. Phân định Portal rõ ràng giữa GNOME và Hyprland
 
-File [`/usr/share/xdg-desktop-portal/hyprland-portals.conf`](file:///usr/share/xdg-desktop-portal/hyprland-portals.conf) đã được thiết lập:
+File `/usr/share/xdg-desktop-portal/hyprland-portals.conf` đã được thiết lập:
 
 ```ini
 [preferred]
@@ -36,7 +36,7 @@ default=hyprland;gtk
 
 ### 1.3. Cơ chế xác thực đặc quyền Root (Polkit Agent)
 
-Script [`~/config/hypr/scripts/Polkit.sh`](~/.config/hypr/scripts/Polkit.sh) đang nạp agent:
+Script `~/.config/hypr/scripts/Polkit.sh` đang nạp agent:
 `/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1`
 Agent này thuộc Ubuntu host, đảm bảo khi bạn chạy các lệnh quản trị hệ thống (`pkexec`, GParted, phần mềm phân vùng), cửa sổ nhập mật khẩu đồ họa luôn xuất hiện mượt mà.
 
@@ -91,7 +91,7 @@ Nếu sau khi `home-manager switch`, một gói phần mềm (như Waybar hoặc
 home-manager generations
 
 # Quay trở lại thế hệ trước (ví dụ ID 16)
-~/nix-profile/bin/home-manager switch --generation 16
+~/.local/state/nix/profiles/home-manager-16-link/activate
 ```
 
 ### Cách 2: Kích hoạt trực tiếp từ Nix Store (kể cả khi lệnh `home-manager` bị lỗi)
@@ -164,20 +164,20 @@ Khi Ubuntu cập nhật Kernel mới (`linux-image-6.8.0-xx-generic`), driver NV
 
 Bộ dotfiles của JaKooLit được thiết kế rất thông minh theo nguyên tắc tách biệt:
 
-- **Thư mục Core (do tác giả cập nhật):** `~/config/hypr/configs/`, `~/config/waybar/configs/`
+- **Thư mục Core (do tác giả cập nhật):** `~/.config/hypr/configs/`, `~/.config/waybar/configs/`
 - **Thư mục Cá Nhân (bất khả xâm phạm):**
-  - [`~/config/hypr/UserConfigs/`](~/.config/hypr/UserConfigs/)
-  - [`~/config/hypr/UserScripts/`](~/.config/hypr/UserScripts/)
-  - [`~/config/waybar/UserModules`](~/.config/waybar/UserModules) (Nơi chứa cấu hình `"output": "eDP-1"`)
+  - `~/.config/hypr/UserConfigs/`
+  - `~/.config/hypr/UserScripts/`
+  - `~/.config/waybar/UserModules` (Nơi chứa cấu hình `"output": "eDP-1"`)
 
 ### Các bước khi bạn muốn kéo phiên bản mới của JaKooLit:
 
 1. Luôn sao lưu thư mục cấu hình hiện tại:
    ```bash
-   cp -r ~/config/hypr ~/config/hypr.backup.$(date +%F)
-   cp -r ~/config/waybar ~/config/waybar.backup.$(date +%F)
+   cp -r ~/.config/hypr ~/.config/hypr.backup.$(date +%F)
+   cp -r ~/.config/waybar ~/.config/waybar.backup.$(date +%F)
    ```
 2. Sau khi cập nhật dotfiles mới, kiểm tra lại:
-   - Dòng nạp Quickshell trong [`Startup_Apps.conf`](~/.config/hypr/configs/Startup_Apps.conf) vẫn giữ nguyên `env LD_LIBRARY_PATH=...`.
-   - File [`OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh) vẫn sử dụng `pgrep -f quickshell`.
-   - File [`UserModules`](~/.config/waybar/UserModules) vẫn chứa `"output": "eDP-1"`.
+   - Dòng nạp Quickshell trong `Startup_Apps.conf` vẫn giữ nguyên `env LD_LIBRARY_PATH=...`.
+   - File `OverviewToggle.sh` vẫn sử dụng `pgrep -f 'qs -c overview'`.
+   - File `UserModules` vẫn chứa `"output": "eDP-1"`.

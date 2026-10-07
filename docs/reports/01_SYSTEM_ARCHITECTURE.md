@@ -54,5 +54,5 @@ graph TD
    - Các binary trong `/nix/store` được gắn cứng (hardcoded RPATH) trỏ đến dynamic loader và thư viện của Nix, không phụ thuộc vào thư viện của Ubuntu.
 
 3. **Quản lý cấu hình dạng Declarative (Khai báo trạng thái):**
-   - File cấu hình gốc nằm tại [`~/config/home-manager/home.nix`](~/.config/home-manager/home.nix).
-   - Mỗi lần chạy lệnh `home-manager switch`, một thế hệ (generation) mới được tạo ra trong `~/nix-profile/`. Nếu có bất kỳ sự cố nào, có thể rollback tức thì về thế hệ trước chỉ với một lệnh duy nhất.
+   - File cấu hình gốc nằm tại `~/.config/home-manager/home.nix`.
+   - Mỗi lần chạy lệnh `home-manager switch`, một thế hệ (generation) mới được tạo ra trong `~/.nix-profile/`. Nếu có bất kỳ sự cố nào, có thể rollback tức thì về thế hệ trước chỉ với một lệnh duy nhất.

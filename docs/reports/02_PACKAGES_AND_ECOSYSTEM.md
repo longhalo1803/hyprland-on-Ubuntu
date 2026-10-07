@@ -4,7 +4,7 @@
 
 ## 1. Danh Mục Các Gói Quản Lý Bởi Nix Home-Manager
 
-Toàn bộ các gói phần mềm phục vụ môi trường Hyprland được khai báo tập trung tại [`~/config/home-manager/home.nix`](~/.config/home-manager/home.nix):
+Toàn bộ các gói phần mềm phục vụ môi trường Hyprland được khai báo tập trung tại `~/.config/home-manager/home.nix`:
 
 ```nix
 home.packages = with pkgs; [
@@ -67,33 +67,33 @@ Các công cụ dòng lệnh đồ họa (TUI) được thiết lập độc l�
 
 - **Tác giả:** JaKooLit (nhà phát triển cộng đồng nổi tiếng về các bản phân phối Hyprland đẹp và ổn định nhất).
 - **Mã nguồn gốc:** [JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots) (Nhánh hỗ trợ đa nền tảng Ubuntu / Debian / Arch / NixOS).
-- **Phiên bản cấu hình đang chạy:** **`v2.3.20`** (xác định qua `DOTS_VERSION=2.3.20` trong [`~/config/hypr/configs/ENVariables.conf`](~/.config/hypr/configs/ENVariables.conf)).
+- **Phiên bản cấu hình đang chạy:** **`v2.3.20`** (xác định qua `DOTS_VERSION=2.3.20` trong `~/.config/hypr/configs/ENVariables.conf`).
 
 ---
 
-## 3. Bản Đồ Cấu Trúc Các Thư Mục Cấu Hình (`~/config/`)
+## 3. Bản Đồ Cấu Trúc Các Thư Mục Cấu Hình (`~/.config/`)
 
-### 1. `~/config/hypr/` (Trung tâm điều khiển Hyprland)
+### 1. `~/.config/hypr/` (Trung tâm điều khiển Hyprland)
 
 - **`configs/`:**
-  - [`Keybinds.conf`](~/.config/hypr/configs/Keybinds.conf): Định nghĩa toàn bộ phím tắt (`Super + Q`, `Super + A`, `Super + Return`, v.v.).
-  - [`Startup_Apps.conf`](~/.config/hypr/configs/Startup_Apps.conf): Danh sách các ứng dụng/daemon tự khởi động khi đăng nhập.
-  - [`ENVariables.conf`](~/.config/hypr/configs/ENVariables.conf): Khai báo biến môi trường toàn cục (toolkit Qt, GTK, NVIDIA, PATH).
-  - [`SystemSettings.conf`](~/.config/hypr/configs/SystemSettings.conf): Cấu hình touchpad, cử chỉ đa điểm (`gesture = 3, up, dispatcher, exec...`), hoạt ảnh animation, border.
-  - [`Monitors.conf`](~/.config/hypr/configs/Monitors.conf): Độ phân giải, vị trí và tần số quét của các màn hình.
+  - `Keybinds.conf`: Định nghĩa toàn bộ phím tắt (`Super + Q`, `Super + A`, `Super + Return`, v.v.).
+  - `Startup_Apps.conf`: Danh sách các ứng dụng/daemon tự khởi động khi đăng nhập.
+  - `ENVariables.conf`: Khai báo biến môi trường toàn cục (toolkit Qt, GTK, NVIDIA, PATH).
+  - `SystemSettings.conf`: Cấu hình touchpad, cử chỉ đa điểm (`gesture = 3, up, dispatcher, exec...`), hoạt ảnh animation, border.
+  - `Monitors.conf`: Độ phân giải, vị trí và tần số quét của các màn hình.
 - **`scripts/`:**
-  - [`OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh): Kịch bản kích hoạt và chuyển đổi giao diện Overview.
-  - [`Refresh.sh`](~/.config/hypr/scripts/Refresh.sh): Nạp lại Waybar, SwayNC, Rofi mà không cần khởi động lại máy.
-  - [`LockScreen.sh`](~/.config/hypr/scripts/LockScreen.sh): Kích hoạt màn hình khóa Hyprlock.
+  - `OverviewToggle.sh`: Kịch bản kích hoạt và chuyển đổi giao diện Overview.
+  - `Refresh.sh`: Nạp lại Waybar, SwayNC, Rofi mà không cần khởi động lại máy.
+  - `LockScreen.sh`: Kích hoạt màn hình khóa Hyprlock.
 
-### 2. `~/config/waybar/` (Thanh trạng thái Waybar)
+### 2. `~/.config/waybar/` (Thanh trạng thái Waybar)
 
 - **`configs/`:** Chứa 39 kiểu dáng (layout) khác nhau. Bố cục đang kích hoạt: `[TOP] Default Laptop-glass`.
 - **`style/`:** Chứa các bộ CSS giao diện. Bộ CSS đang kích hoạt: `[Kitty] Islands-Glass.css` (bo góc tròn, kính mờ theo Kitty).
 - **`Modules` & `ModulesWorkspaces`:** Định nghĩa các widget hiển thị.
 - **`UserModules`:** Nơi người dùng ghi đè cấu hình cá nhân (khóa cố định output vào `eDP-1` cho laptop).
 
-### 3. `~/config/quickshell/` (Hệ Sinh Thái QML Desktop Shell)
+### 3. `~/.config/quickshell/` (Hệ Sinh Thái QML Desktop Shell)
 
 - **`overview/shell.qml`:** Bộ Window Overview kích hoạt qua `Super + A` hoặc vuốt 3 ngón tay.
 - **`wallpaper-flow/shell.qml`:** Bộ chọn hình nền **Parallelogram 2D Flow** độc lập kích hoạt qua `Super + W`.

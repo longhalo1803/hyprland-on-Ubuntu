@@ -36,17 +36,6 @@ tar -xf JetBrainsMono.tar.xz -C ~/.local/share/fonts/
 fc-cache -fv
 ```
 
-### 3. Cài đặt tiện ích hình nền `swww`
-
-```bash
-# Tải binary swww dựng sẵn cho x86_64
-cd /tmp
-curl -OL https://github.com/LGFae/swww/releases/latest/download/swww-x86_64-unknown-linux-gnu.tar.gz
-tar -xzf swww-x86_64-unknown-linux-gnu.tar.gz
-sudo mv swww swww-daemon /usr/bin/
-sudo chmod +x /usr/bin/swww /usr/bin/swww-daemon
-```
-
 ---
 
 ## Giai Đoạn 2: Cài Đặt Nix & Thiết Lập Tầng Cô Lập Home-Manager
@@ -67,7 +56,7 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 ```
 
-### 3. Tạo file cấu hình [`~/.config/home-manager/home.nix`](~/.config/home-manager/home.nix)
+### 3. Tạo file cấu hình `~/.config/home-manager/home.nix`
 
 Tạo file khai báo toàn bộ công cụ người dùng kèm cầu nối driver đồ họa OpenGL/EGL (`pkgs.mesa`) đóng gói tự động:
 
@@ -126,6 +115,7 @@ in
     swappy
     wl-clipboard
     mesa
+    swww
   ];
 
   programs.home-manager.enable = true;
@@ -177,22 +167,22 @@ cp -r ~/Downloads/Hyprland-Dots/config/quickshell/* ~/.config/quickshell/overvie
 > [!NOTE]
 > Nhờ cơ chế `symlinkJoin` khai báo trực tiếp trong `home.nix` ở Giai đoạn 2, các nhị phân `kitty`, `quickshell`, và `qs` trong `~/.nix-profile/bin/` đã tự động tích hợp sẵn bridge driver GPU của Nix. Bạn **không cần** tạo bất kỳ script wrapper thủ công nào trong `~/.local/bin`.
 
-### 3. Vá lỗi nhận diện tiến trình trong [`OverviewToggle.sh`](~/.config/hypr/scripts/OverviewToggle.sh)
+### 3. Vá lỗi nhận diện tiến trình trong `~/.config/hypr/scripts/OverviewToggle.sh`
 
 Script gốc dùng `pgrep -x quickshell` sẽ bị fail do wrapper binary của Nix có tên `.quickshell-wra`. Ta thay thế bằng `pgrep -f`:
 
 ```bash
-sed -i 's/pgrep -x quickshell/pgrep -f quickshell || pidof quickshell/g' ~/.config/hypr/scripts/OverviewToggle.sh
+sed -i "s/pgrep -x quickshell/pgrep -f 'qs -c overview' || pidof qs/g" ~/.config/hypr/scripts/OverviewToggle.sh
 ```
 
 ### 4. Cập nhật biến môi trường Hyprland
 
-- **Tại [`~/.config/hypr/configs/ENVariables.conf`](~/.config/hypr/configs/ENVariables.conf):**
+- **Tại `~/.config/hypr/configs/ENVariables.conf`:**
   Thêm dòng sau vào ngay đầu file:
   ```ini
   env = PATH,$HOME/.local/bin:$PATH
   ```
-- **Tại [`~/.config/hypr/configs/Startup_Apps.conf`](~/.config/hypr/configs/Startup_Apps.conf):**
+- **Tại `~/.config/hypr/configs/Startup_Apps.conf`:**
   Cập nhật dòng khởi chạy Quickshell:
   ```ini
   exec-once = env LD_LIBRARY_PATH=$HOME/.nix-profile/lib LIBGL_DRIVERS_PATH=$HOME/.nix-profile/lib/dri GBM_BACKENDS_PATH=$HOME/.nix-profile/lib/gbm qs -c overview
@@ -202,7 +192,7 @@ sed -i 's/pgrep -x quickshell/pgrep -f quickshell || pidof quickshell/g' ~/.conf
 
 ## Giai Đoạn 5: Cấu Hình Waybar Chỉ Hiển Thị Màn Hình Chính
 
-Thêm chỉ định màn hình vào [`~/.config/waybar/UserModules`](~/.config/waybar/UserModules):
+Thêm chỉ định màn hình vào `~/.config/waybar/UserModules`:
 
 ```json
 {
